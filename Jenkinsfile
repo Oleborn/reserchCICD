@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven 3.9.9' // Имя, которое вы указали в Global Tool Configuration
+    }
+
     stages {
 
         stage('Clone Repository') {
