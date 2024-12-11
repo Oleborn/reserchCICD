@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Check Java Version') {
-            steps {
-                sh 'mvn -version'
-            }
-        }
-
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/Oleborn/reserchCICD.git'
