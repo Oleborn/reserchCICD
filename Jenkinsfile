@@ -6,6 +6,7 @@ pipeline {
         stage('Check Java Version') {
             steps {
                 sh 'java -version'
+                sh 'mvn -version'
             }
         }
 
@@ -19,7 +20,7 @@ pipeline {
             steps {
                 sh '''
                 chmod +x ./mvnw
-                ./mvnw clean package -e -X
+                ./mvnw clean package
                 '''
             }
         }
