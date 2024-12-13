@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                 docker stop spring-boot-app || true
                 docker rm spring-boot-app || true
-                docker run -d --name spring-boot-app -p 8080:8080 spring-boot-app:1.0
+                docker run -d --name spring-boot-app -p 9090:8080 spring-boot-app:1.0
                 '''
             }
         }
