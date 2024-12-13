@@ -19,6 +19,21 @@ pipeline {
             }
         }
 
+        stage('Docker Cleanup') {
+            steps {
+                // Удаление всех остановленных контейнеров с именем spring-boot-app
+                sh '''
+                docker ps -a -q --filter "name=spring-boot-app" | xargs -r docker stop
+                docker ps -a -q --filter "name=spring-boot-app" | xargs -r docker rm
+                '''
+
+                // Удаление всех старых образов, которые не используются (можно оставить только если хотите чистить все ненужные образы)
+                sh '''
+                docker images -q --filter "dangling=true" | xargs -r docker rmi
+                '''
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t spring-boot-app:1.0 .'
@@ -28,8 +43,6 @@ pipeline {
         stage('Run Docker') {
             steps {
                 sh '''
-                docker stop spring-boot-app || true
-                docker rm spring-boot-app || true
                 docker run -d --name spring-boot-app -p 9090:8080 spring-boot-app:1.0
                 '''
             }
