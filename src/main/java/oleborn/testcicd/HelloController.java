@@ -13,6 +13,6 @@ public class HelloController {
 
     @GetMapping("/testCICD")
     public String testCICD() {
-        return "Ебать-колотить, работает! АХуЕТ";
+        return "Ебать-колотить, работает! АХуЕТь";
     }
 }
